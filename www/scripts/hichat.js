@@ -1,9 +1,5 @@
 /*
- *hichat v0.4.2
- *Wayou Mar 28,2014
- *MIT license
- *view on GitHub:https://github.com/wayou/HiChat
- *see it in action:http://hichat.herokuapp.com/
+
  */
 window.onload = function() {
     var hichat = new HiChat();
@@ -17,12 +13,12 @@ HiChat.prototype = {
         var that = this;
         this.socket = io.connect();
         this.socket.on('connect', function() {
-            document.getElementById('info').textContent = 'get yourself a nickname :)';
+            document.getElementById('info').textContent = 'Escribe tu nombre/apodo :)';
             document.getElementById('nickWrapper').style.display = 'block';
             document.getElementById('nicknameInput').focus();
         });
         this.socket.on('nickExisted', function() {
-            document.getElementById('info').textContent = '!nickname is taken, choose another pls';
+            document.getElementById('info').textContent = '!Este nombre esta cogido, por favor elige otro.';
         });
         this.socket.on('loginSuccess', function() {
             document.title = 'hichat | ' + document.getElementById('nicknameInput').value;
@@ -31,9 +27,9 @@ HiChat.prototype = {
         });
         this.socket.on('error', function(err) {
             if (document.getElementById('loginWrapper').style.display == 'none') {
-                document.getElementById('status').textContent = '!fail to connect :(';
+                document.getElementById('status').textContent = '!Fallo de conexción. :(';
             } else {
-                document.getElementById('info').textContent = '!fail to connect :(';
+                document.getElementById('info').textContent = '!Fallo de conexción. :(';
             }
         });
         this.socket.on('system', function(nickName, userCount, type) {
@@ -94,7 +90,7 @@ HiChat.prototype = {
                     reader = new FileReader(),
                     color = document.getElementById('colorStyle').value;
                 if (!reader) {
-                    that._displayNewMsg('system', '!your browser doesn\'t support fileReader', 'red');
+                    that._displayNewMsg('system', '!tu navegador no soporta fileReader', 'red');
                     this.value = '';
                     return;
                 };
